@@ -84,10 +84,10 @@ module.exports = async (req, res) => {
                 await testresult.push(etcSkill);
             }
             res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.TEST_CODE_SKILL_READ, testresult));
-        }
+        }//그 외 필요한값이없는 경우
         else if (categoryId === undefined || skillId === undefined) {
-            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.INTERNAL_SERVER_ERROR));
-        }
+            res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.NOT_VALUE, responseMessage.INTERNAL_SERVER_ERROR));
+        }//try 구문 에러검출시 서버에러 표시
     } catch (error) {
         functions.logger.error(`[ERROR] [${req.method.toUpperCase()}] ${req.originalUrl}`, `[CONTENT] ${error}`);
         console.log(error);
